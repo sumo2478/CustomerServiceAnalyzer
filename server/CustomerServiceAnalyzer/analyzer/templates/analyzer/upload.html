@@ -1,0 +1,14 @@
+<html>
+<head>
+	<title>Upload Log</title>
+</head>
+<body>
+	<h1>Upload Document</h1>
+	<form action="{% url 'analyzer:upload_file' %}" method="post" enctype="multipart/form-data">
+		{% csrf_token %}
+		<p>{{ form.docfile.label_tag }}</p>
+		<p>{{ form.docfile }} </p>
+		<input type="submit" value="Upload" />
+	</form>
+</body>
+</html>
