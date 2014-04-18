@@ -1,0 +1,21 @@
+{% extends "main/base.html" %}
+
+{% block body %}
+
+{% if error_message %} <div>{{ error_message }}</div>{% endif %}
+<form role="form" action={% block form_action %}"{% url 'main:login_request' %}" {% endblock form_action %} method="post">
+	<h2>{% block header %}Login Page{% endblock header %}</h2>
+		{% csrf_token %}
+		 <input type="text" name="username" placeholder="Username" required autofocus>
+		 <input type="password" name="password" placeholder="Password" required>
+
+	    {% block extra_fields %}{% endblock extra_fields %}
+
+	    <button  type="submit" style="margin-top:10px">{% block submit %}Sign in{% endblock submit %}</button>
+
+		{% block extra_button %} {% endblock extra_button %}
+</form>
+
+	{% block extra_body %}{% endblock extra_body %}
+	
+{% endblock body %}

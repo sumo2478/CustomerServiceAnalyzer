@@ -7,6 +7,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import auth
 
 from main.models import Employee
+from chat.models import Chat
 
 
 # Create your views here.

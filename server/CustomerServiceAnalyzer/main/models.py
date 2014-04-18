@@ -1,6 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+from chat.models import Chat
+
 # Create your models here.
 class BasePerson(models.Model):
     user = models.OneToOneField(User)
@@ -49,20 +51,5 @@ class EmployeeChatList(models.Model):
         message = Chat.objects.filter(chat_id=self.chat_id)
         return message[0].timestamp
 
-class Chat(models.Model):
-    chat_id     = models.IntegerField(default=0)
-    timestamp   = models.DateTimeField(auto_now_add=True)
-    message     = models.TextField(default="")
-    is_employee = models.BooleanField(default=False)
-    score       = models.IntegerField(default=0)
 
-    def sentiment(self):
-        if self.score == 1:
-            return "Positive"
-        elif self.score == -1:
-            return "Negative"
-        else:
-            return "Neutral"
-    class Meta:
-        ordering = ['timestamp']
 

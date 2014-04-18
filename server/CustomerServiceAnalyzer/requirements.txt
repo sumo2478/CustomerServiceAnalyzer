@@ -1,0 +1,3 @@
+Python==2.7.5
+Twisted==13.1.0
+pyOpenSSL==0.14

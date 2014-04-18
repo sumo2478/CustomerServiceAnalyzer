@@ -14,11 +14,7 @@ class ManagerAdmin(admin.ModelAdmin):
 class EmployeeChatAdmin(admin.ModelAdmin):
 	list_display = ['employee', 'customer_name', 'sentiment', 'timestamp']
 
-class ChatAdmin(admin.ModelAdmin):
-	list_display = ['chat_id', 'timestamp', 'message', 'is_employee', 'sentiment']
-	search_fields = ['chat_id']
-
 admin.site.register(Manager,          ManagerAdmin)
 admin.site.register(Employee,         EmployeeAdmin)
 admin.site.register(EmployeeChatList, EmployeeChatAdmin)
-admin.site.register(Chat,             ChatAdmin)
+
