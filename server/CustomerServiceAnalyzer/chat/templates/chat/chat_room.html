@@ -1,0 +1,50 @@
+{% load staticfiles %}
+
+<h1>Chat Room</h1>
+<div id="message_list"></div>
+<input type="text" id="inputbox">
+<button onclick="chat.login()">Login</button>
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script type="text/javascript" src="{% static "jquery.gracefulWebSocket.js" %}"></script>
+
+<script>
+    $(document).ready( function() {
+    window.chat = {};
+    //Instantiate a websocket client connected to our server
+    chat.ws = $.gracefulWebSocket("ws://127.0.0.1:23316/ws");
+ 
+    //Basic message send
+    chat.send = function (message) {
+      chat.ws.send("{\"action\": 1, \"message\":\"" + message + "\"}");
+    }
+ 
+    //Basic message receive
+    chat.ws.onmessage = function (event) {
+      var messageFromServer = event.data;
+      var list_element = document.createElement('li');
+      list_element.innerHTML = messageFromServer;
+      $("#message_list ul").prepend(list_element);
+    };
+
+    var inputBox = document.getElementById("inputbox");
+ 
+    inputbox.addEventListener("keydown", function(e) {
+      if (!e) { var e = window.event; }
+ 
+      //keyCode 13 is the enter/return button keyCode
+      if (e.keyCode == 13) {
+        // enter/return probably starts a new line by default
+        e.preventDefault();
+        chat.send(inputbox.value);
+        inputbox.value="";
+      }
+    }, false); 
+
+    // Log into chat service
+    chat.login = function() {
+    	chat.ws.send("{\"entity_type\":1, \"action\": 0, \"id\": 1, \"name\": \"Collin\"}")
+    };
+
+	});
+</script>

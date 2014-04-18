@@ -2,6 +2,7 @@ from twisted.protocols import basic
 from twisted.web.websockets import WebSocketsResource, WebSocketsProtocol, lookupProtocolForFactory
 
 import constants
+import json
 
 PORT = 23316
 
@@ -29,18 +30,18 @@ class ChatHandler(basic.LineReceiver):
     def dataReceived(self, data):
         try:
             message = json.loads(data)
-
-            if (message['action'] == constants.ACTION_JOIN):
-                self.handle_join(message)
-            elif (message['action'] == constants.ACTION_MESSAGE):
-                self.handle_message(message)
-            elif (message['action'] == constants.ACTION_LEAVE):
-                self.handle_leave(message)
-            else:
-                self.handle_error()
         except:
             print "Invalid json input " + str(data)
             return
+
+        if (message['action'] == constants.ACTION_JOIN):
+            self.handle_join(message)
+        elif (message['action'] == constants.ACTION_MESSAGE):
+            self.handle_message(message)
+        elif (message['action'] == constants.ACTION_LEAVE):
+            self.handle_leave(message)
+        else:
+            self.handle_error()
 
         print message
 
