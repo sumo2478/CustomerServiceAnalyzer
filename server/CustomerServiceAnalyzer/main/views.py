@@ -57,6 +57,29 @@ def homepage(request):
     """Homepage"""
     return render(request, 'main/homepage.html')
 
+def login(request):
+    """Login Function"""
+    return render(request, 'main/login.html')
+
+def login_request(request):
+    """Login Request"""
+    username = request.POST['username']
+    password = request.POST['password']
+
+    user = auth.authenticate(username=username, password=password)
+
+    if user is not None:
+        if user.is_active:
+            auth.login(request, user)
+            return HttpResponseRedirect(reverse('main:homepage'))
+        else:
+            # Return a disabled account error
+            return render(request, 'main/login.html', {'error_message': "You're account has been disabled."})
+    else:
+        # Return an invalid login error message
+        return render(request, 'main/login.html', {'error_message': "Invalid username/password"})
+
+
 def logout(request):
     """Logout Function"""
     auth.logout(request)
