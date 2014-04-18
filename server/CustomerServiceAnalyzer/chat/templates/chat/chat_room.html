@@ -1,9 +1,9 @@
 {% load staticfiles %}
 
 <h1>Chat Room</h1>
-<div id="message_list"></div>
 <input type="text" id="inputbox">
 <button onclick="chat.login()">Login</button>
+<div id="message_list"></div>
 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 <script type="text/javascript" src="{% static "jquery.gracefulWebSocket.js" %}"></script>
@@ -22,9 +22,10 @@
     //Basic message receive
     chat.ws.onmessage = function (event) {
       var messageFromServer = event.data;
+      var message = JSON.parse(messageFromServer);
       var list_element = document.createElement('li');
-      list_element.innerHTML = messageFromServer;
-      $("#message_list ul").prepend(list_element);
+      list_element.innerHTML = message.message;
+      $("#message_list").append(list_element);
     };
 
     var inputBox = document.getElementById("inputbox");
@@ -43,7 +44,7 @@
 
     // Log into chat service
     chat.login = function() {
-    	chat.ws.send("{\"entity_type\":1, \"action\": 0, \"id\": 1, \"name\": \"Collin\"}")
+    	chat.ws.send("{\"entity_type\":{{ info.entity_type }}, \"action\": 0, \"id\": {{ info.id }}, \"name\": \"{{ info.name }}\"}")
     };
 
 	});
