@@ -1,9 +1,6 @@
+{% extends "main/base.html" %}
 {% load staticfiles %}
-
-<h1>Chat Room</h1>
-<input type="text" id="inputbox">
-<button onclick="chat.login()">Login</button>
-<div id="message_list"></div>
+{% block head %}
 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 <script type="text/javascript" src="{% static "jquery.gracefulWebSocket.js" %}"></script>
@@ -44,8 +41,18 @@
 
     // Log into chat service
     chat.login = function() {
-    	chat.ws.send("{\"entity_type\":{{ info.entity_type }}, \"action\": 0, \"id\": {{ info.id }}, \"name\": \"{{ info.name }}\"}")
+      chat.ws.send("{\"entity_type\":{{ info.entity_type }}, \"action\": 0, \"id\": {{ info.id }}, \"name\": \"{{ info.name }}\"}")
     };
 
-	});
+  });
 </script>
+{% endblock head %}
+
+{% block body %}
+
+<h1>Chat Room</h1>
+<input type="text" id="inputbox">
+<button onclick="chat.login()" class="btn btn-info">Login</button>
+<div id="message_list"></div>
+{% endblock body %}
+

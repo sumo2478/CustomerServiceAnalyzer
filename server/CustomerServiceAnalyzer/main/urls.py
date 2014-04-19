@@ -2,9 +2,8 @@ from django.conf.urls import patterns, url
 from main import views
 
 urlpatterns = patterns('',
-        url(r'^$', views.index, name='index'),
-
-        url(r'^index/$', views.index, name='index'),
+        url(r'^$', views.info, name='info'),
+        url(r'^info/$', views.info, name='info'),
 
         url(r'^registeremployee/$', views.register_employee, name='registeremployee'),
 

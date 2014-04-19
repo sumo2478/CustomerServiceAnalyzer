@@ -16,9 +16,9 @@ from chat.models import Chat
 # Index Views
 #############################################################
 
-def index(request):
+def info(request):
     """Info Page - Homepage"""
-    return render(request, 'main/index.html')
+    return render(request, 'main/info.html')
 
 def create_employee(request):
     """ Create Employee Function """
@@ -57,7 +57,7 @@ def register_employee(request):
     """Employee Registration"""
     return render(request, 'main/registeremployee.html')
 
-@login_required(login_url='/main/index')
+@login_required(login_url='/main/info')
 def homepage(request):
     """Homepage"""
     return render(request, 'main/homepage.html')
@@ -105,6 +105,6 @@ def base_login(request, redirect_page, return_error_page):
 def logout(request):
     """Logout Function"""
     auth.logout(request)
-    return HttpResponseRedirect(reverse('main:index'))
+    return HttpResponseRedirect(reverse('main:info'))
 
     
