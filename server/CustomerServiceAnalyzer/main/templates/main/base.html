@@ -4,7 +4,7 @@
 <html>
 <head>
 	<title>{% block title %}Chat Analyzer{% endblock title %} </title>
-	<link href="{% static 'css/bootstrap.css' %}" rel="stylesheet">
+	{% block stylesheets %}<link href="{% static 'css/bootstrap.css' %}" rel="stylesheet">{% endblock stylesheets %}
 </head>
 
 <body>
