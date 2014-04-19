@@ -8,5 +8,6 @@ urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
     url(r'^main/', include('main.urls', namespace="main")),
     url(r'^analyzer/', include('analyzer.urls', namespace="analyzer")),
-    url(r'^chat/', include('chat.urls', namespace="chat"))
+    url(r'^chat/', include('chat.urls', namespace="chat")),
+    url(r'^employee/', include('employee.urls', namespace="employee"))
 )

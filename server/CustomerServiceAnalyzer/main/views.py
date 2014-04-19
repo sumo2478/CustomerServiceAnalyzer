@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse, HttpResponseRedirect
 from django.core.urlresolvers import reverse
 
-from django.contrib.auth.models import User # User authentication
+from django.contrib.auth.models import User, Group # User authentication
 from django.contrib.auth.decorators import login_required
 from django.contrib import auth
 
@@ -36,8 +36,12 @@ def create_employee(request):
                                  first_name=first_name,
                                  last_name=last_name)
 
-    e = Employee(user=u)
+    # Add the user ot the Employee group
+    groupid, group = Group.objects.get_or_create(name="Employee")
+    u.groups.add(groupid)
 
+    # Create the Employee
+    e = Employee(user=u)
     e.save()
 
     user = auth.authenticate(username=username, password=password)
@@ -80,6 +84,23 @@ def login_request(request):
         # Return an invalid login error message
         return render(request, 'main/login.html', {'error_message': "Invalid username/password"})
 
+def base_login(request, redirect_page, return_error_page):
+    """Base Login Request"""
+    username = request.POST['username']
+    password = request.POST['password']
+
+    user = auth.authenticate(username=username, password=password)
+
+    if user is not None:
+        if user.is_active:
+            auth.login(request, user)
+            return HttpResponseRedirect(reverse(redirect_page))
+        else:
+            # Return a disabled account error
+            return render(request, return_error_page, {'error_message': "You're account has been disabled."})
+    else:
+        # Return an invalid login error message
+        return render(request, return_error_page, {'error_message': "Invalid username/password"})
 
 def logout(request):
     """Logout Function"""
