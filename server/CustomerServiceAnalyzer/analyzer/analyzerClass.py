@@ -2,7 +2,7 @@ import json
 from urllib import urlencode
 from urllib2 import urlopen
 
-from main.models import Chat
+from chat.models import Chat
 
 class Analyzer(object):
 	"""Chat Sentiment Analyzer Class"""

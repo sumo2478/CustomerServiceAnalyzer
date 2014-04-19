@@ -6,7 +6,7 @@ from django.contrib.auth.models import User, Group # User authentication
 from django.contrib.auth.decorators import login_required
 from django.contrib import auth
 
-from main.models import Employee
+from employee.models import Employee
 from chat.models import Chat
 
 

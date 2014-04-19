@@ -5,7 +5,9 @@ from django.core.urlresolvers import reverse
 
 from .uploader import UploadFile
 from main import views
-from main.models import EmployeeChatList, Chat, Employee
+
+from employee.models import EmployeeChatList, Employee
+from chat.models import Chat
 
 import json
 from analyzerClass import Analyzer

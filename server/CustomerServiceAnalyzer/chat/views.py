@@ -2,6 +2,8 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404
 
+from django.contrib.auth.models import User
+
 import constants
 
 # Create your views here.
@@ -10,13 +12,12 @@ def render_chat_room(request, info):
 
 def employee_chat_room(request):
 	info = {}
-	info['id'] = 1
-	info['name'] = "Collin Yen"
+	info['id'] = request.user.id
+	info['name'] = request.user.get_full_name()
 	info['entity_type'] = constants.ENTITY_TYPE_EMPLOYEE
 
 	return render_chat_room(request, info)
     
-
 def customer_chat_room(request):
 	info = {}
 	info['id'] = 2
