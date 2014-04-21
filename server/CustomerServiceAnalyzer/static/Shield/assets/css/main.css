@@ -61,8 +61,7 @@ body {
  * Remove the gap between images and the bottom of their containers: h5bp.com/i/440
  */
 
- 
- {
+ img {
     vertical-align: middle;
 }
 
@@ -311,9 +310,8 @@ a:after {
 	line-height: 40px;
 	letter-spacing: 3px;
 	margin-left: 15px;
-    text-shadow: 1px 1px 1px #333;
+    text-shadow: 1px 1px 1px #000;
     
-   
 }
 
 #greywrap {
