@@ -3660,10 +3660,6 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   border-top-right-radius: 0;
 }
 
-.navbar-main {
-  background: trasparent;
-}
-
 .navbar {
   position: relative;
   min-height: 50px;

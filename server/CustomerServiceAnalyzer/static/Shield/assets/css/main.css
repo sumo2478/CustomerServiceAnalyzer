@@ -61,7 +61,8 @@ body {
  * Remove the gap between images and the bottom of their containers: h5bp.com/i/440
  */
 
- img {
+ 
+ {
     vertical-align: middle;
 }
 
@@ -87,7 +88,7 @@ body {
     font-family: "Lato";
     font-weight: 300;
     font-size: 16px;
-    color: #555;
+    color: #141414;
 
     -webkit-font-smoothing: antialiased;
     -webkit-overflow-scrolling: touch;
@@ -270,6 +271,7 @@ a:after {
    Wrap Sections
    ========================================================================== */
 
+
 #headerwrap {
 	background: url(../img/peopleattable_copy1.jpg) no-repeat center top;
 	margin-top: -50px;
@@ -366,7 +368,7 @@ a:after {
 	padding-top: 25px;
 }
 
-/* Section Dividers */
+/* Section Dividers Modified*/
 .section-divider {
     z-index: 999;
     width: 100%;
@@ -377,10 +379,10 @@ a:after {
     -moz-box-sizing: border-box;
     -ms-box-sizing: border-box;
     box-sizing: border-box;
-    padding-top: 30px;
-    padding-bottom: 70px;
-    margin-top: 45px;
-
+    padding-top: 75px;
+    padding-bottom: 30px;
+    /*margin-top: 45px;*/
+    height:350px;
 
     background-position: center center;
 
@@ -394,19 +396,19 @@ a:after {
     -o-background-size: cover;
     background-size: cover;
 
-    background-attachment: relative;
+    /*background-attachment: relative;*/
     
     text-align: center;
 }
 
 .textdivider h1 {
-	padding-top: 70px;
-	color: white;
+	/*padding-top: 70px;*/
+	color: #ffffff;
 	font-size: 40px;
 }
 
 .textdivider p {
-	color: white;
+	color: #ffffff;
 	font-size: 25px;
 }
 
@@ -636,4 +638,46 @@ a:after {
 		line-height: 38px;
 	}
 }
+/* top bar trasparent*/
+.navbar-wrapper {
+    background: rgba(0,0,0,0.65);
+}
 
+/* top bar texts changes color when you hover over it*/
+.navbar-color > li > a:hover {
+    color:#3498db !important;
+}
+
+/*top bar text colors*/
+.navbar-custom-color > li > a {
+    color:white !important;
+    font-style: bold !important;
+    font-weight: 400 !important;
+}
+
+.strip {
+    opacity: .65;
+    background-color: #141414;
+    max-width: 100%;
+    font-style: bold;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    margin:0;
+}
+
+
+/*.graybox {
+    opacity: .65;
+    background-color: #141414;
+    padding-top: 5px;
+
+}
+/*max-height: 450px;
+    border-bottom: 2px solid #E6EAED;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    box-sizing: border-box;
+    padding-top: 30px;
+    padding-bottom: 70px;
+    margin-top: 45px;*/
