@@ -8,7 +8,8 @@ class EmployeeAdmin(admin.ModelAdmin):
     list_display = ['name', 'id']
 
 class EmployeeChatListAdmin(admin.ModelAdmin):
-    list_display = ['employee', 'customer_name', 'sentiment', 'timestamp']
+	search_fields =['employee__user__first_name', 'employee__user__last_name']
+	list_display = ['chat_id', 'employee', 'customer_name', 'sentiment', 'timestamp']
 
 admin.site.register(Employee,         EmployeeAdmin)
 admin.site.register(EmployeeChatList, EmployeeChatListAdmin)

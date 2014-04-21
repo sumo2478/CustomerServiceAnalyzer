@@ -4,9 +4,12 @@ from django.contrib.auth.decorators import login_required
 
 urlpatterns = patterns('',
 
-	# Employee Index Page
-	url(r'^$', views.info, name='info'),
-	url(r'^employee/$', views.info, name='info'),
+	# Employee Home Page
+	url(r'^$', views.home, name='home'),
+	url(r'^home/$', views.home, name='home'),
+
+	# Employee Info Page
+	url(r'^info/$', views.info, name='info'),
 
 	# Login Page
 	url(r'^login/$', views.login, name='login'),
@@ -14,6 +17,14 @@ urlpatterns = patterns('',
 	# Login Request Function
 	url(r'^login_request/$', views.login_request, name='login_request'),
 
-	# Home Page
-	url(r'^home/$', views.home, name='home')
+	# Logout Function
+	url(r'^logout/$', views.logout, name='logout'),
+
+	# Register Employee Page
+	url(r'^register/$', views.register, name='register'),
+
+	# Register Employee Function
+	url(r'^create_employee/$', views.create_employee, name='create_employee')
+
+	
 	)
