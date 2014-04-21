@@ -21,7 +21,7 @@ def employee_chat_room(request):
 def customer_chat_room(request):
 	info = {}
 	info['id'] = 2
-	info['name'] = "Misa Campo"
+	info['name'] = "Customer"
 	info['entity_type'] = constants.ENTITY_TYPE_CUSTOMER
 
 	return render_chat_room(request, info)

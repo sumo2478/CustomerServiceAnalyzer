@@ -7,8 +7,8 @@ from chat.models import Chat
 class EmployeeAdmin(admin.ModelAdmin):
     list_display = ['name', 'id']
 
-class EmployeeChatAdmin(admin.ModelAdmin):
-	list_display = ['employee', 'customer_name', 'sentiment', 'timestamp']
+class EmployeeChatListAdmin(admin.ModelAdmin):
+    list_display = ['employee', 'customer_name', 'sentiment', 'timestamp']
 
 admin.site.register(Employee,         EmployeeAdmin)
-admin.site.register(EmployeeChatList, EmployeeChatAdmin)
+admin.site.register(EmployeeChatList, EmployeeChatListAdmin)

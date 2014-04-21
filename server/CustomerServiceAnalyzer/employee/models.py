@@ -28,4 +28,7 @@ class EmployeeChatList(models.Model):
 
     def timestamp(self):
         message = Chat.objects.filter(chat_id=self.chat_id)
-        return message[0].timestamp
+        if (len(message) > 0):
+            return message[0].timestamp
+        else:
+            return 0

@@ -10,6 +10,7 @@
     window.chat = {};
     //Instantiate a websocket client connected to our server
     chat.ws = $.gracefulWebSocket("ws://127.0.0.1:23316/ws");
+    establish_connection();
  
     //Basic message send
     chat.send = function (message) {
@@ -21,7 +22,11 @@
       var messageFromServer = event.data;
       var message = JSON.parse(messageFromServer);
       var list_element = document.createElement('li');
-      list_element.innerHTML = message.message;
+      if (message.name) {
+        list_element.innerHTML = message.name + ": " + message.message;
+      }else {
+        list_element.innerHTML = message.message;
+      }
       $("#message_list").append(list_element);
     };
 
@@ -39,10 +44,29 @@
       }
     }, false); 
 
-    // Log into chat service
-    chat.login = function() {
-      chat.ws.send("{\"entity_type\":{{ info.entity_type }}, \"action\": 0, \"id\": {{ info.id }}, \"name\": \"{{ info.name }}\"}")
-    };
+    function establish_connection() {
+      // Wait until state of socket is ready
+      waitForSocketConnection(chat.ws, function() {
+        chat.ws.send("{\"entity_type\":{{ info.entity_type }}, \"action\": 0, \"id\": {{ info.id }}, \"name\": \"{{ info.name }}\"}");
+      });
+    }
+
+    function waitForSocketConnection(socket, callback) {
+      setTimeout(
+        function () {
+          // If connection has been made
+          if (socket.readyState === 1) {
+            if (callback != null) {
+              callback();
+            }
+            return;
+          } else {
+            // Wait for connection
+            waitForSocketConnection(socket, callback);
+          }
+        }, 5
+      );
+    }
 
   });
 </script>
@@ -52,7 +76,6 @@
 
 <h1>Chat Room</h1>
 <input type="text" id="inputbox">
-<button onclick="chat.login()" class="btn btn-info">Login</button>
 <div id="message_list"></div>
 {% endblock body %}
 
