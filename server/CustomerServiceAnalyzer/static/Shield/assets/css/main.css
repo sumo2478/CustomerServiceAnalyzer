@@ -98,8 +98,8 @@ body {
 }
 
 .row {
-margin-right: 0px;
-margin-left: -15px;
+    margin-right: 0px;
+    margin-left: -15px;
 }
 
 .modal-header {
@@ -272,7 +272,7 @@ a:after {
 
 
 #headerwrap {
-	background: url(../img/peopleattable_copy1.jpg) no-repeat center top;
+	background: url(../img/peopleattable_copy2.jpg) no-repeat center top;
 	margin-top: -50px;
 	padding-top:120px;
 	text-align:center;
@@ -353,6 +353,11 @@ a:after {
 	color: white;
 }
 
+/*changed color for part of the texts in footerwrap*/
+
+#footerwrap  h4 span {
+    color: #3498db;
+}
 
 /* ==========================================================================
    Box Sections
@@ -426,13 +431,6 @@ a:after {
 	margin-top: 0px;
 }
 
-.divider4 {
-	background-image: url('../img/bg/divider4.jpg')
-}
-
-.divider6 {
-	background-image: url('../img/bg/divider6.jpg')
-}
 
 
 
@@ -653,6 +651,7 @@ a:after {
     font-weight: 400 !important;
 }
 
+/* added gray opaque stirp on the dividers*/
 .strip {
     opacity: .65;
     background-color: #141414;
@@ -662,6 +661,10 @@ a:after {
     padding-bottom: 10px;
     margin:0;
 }
+.linkedicon {
+    color: #3498db;
+}
+
 
 
 /*.graybox {
