@@ -1,0 +1,14 @@
+{% extends "main/base_login.html" %}
+
+{% block header %}Register{% endblock header %}
+
+{% block form_action %}"{% url 'employee:create_employee' %}"{% endblock form_action %}
+
+{% block extra_fields %}
+<input type="password" name="confirm_password" placeholder="Confirm Password" required><br>
+<input type="text" name="first_name" placeholder="First Name"><br>
+<input type="text" name="last_name" placeholder="Last Name"><br>
+{% endblock extra_fields %}
+
+{% block submit %}Register{% endblock submit %}
+
