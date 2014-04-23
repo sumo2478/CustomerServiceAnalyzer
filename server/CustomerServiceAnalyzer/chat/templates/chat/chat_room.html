@@ -10,6 +10,8 @@
     window.chat = {};
     //Instantiate a websocket client connected to our server
     chat.ws = $.gracefulWebSocket("ws://127.0.0.1:23316/ws");
+    var chat_id = -99; // Chat Id of the session
+
     establish_connection();
  
     //Basic message send
@@ -22,7 +24,11 @@
       var messageFromServer = event.data;
       var message = JSON.parse(messageFromServer);
       var list_element = document.createElement('li');
-      if (message.name) {
+      if (message.chat_id) {
+        list_element.innerHTML = "Customer " + message.name + " has connected with chat id: " + message.chat_id;
+        chat_id = message.chat_id;
+      }
+      else if (message.name) {
         list_element.innerHTML = message.name + ": " + message.message;
       }else {
         list_element.innerHTML = message.message;
@@ -68,6 +74,11 @@
       );
     }
 
+    analyze = function() {
+      document.getElementById('chat_id').value = chat_id;
+      document.getElementById('analyze_form').submit();
+    }
+
   });
 </script>
 {% endblock head %}
@@ -75,6 +86,12 @@
 {% block body %}
 
 <h1>Chat Room</h1>
+<form role="form" action="{% url 'analyzer:analyze' %}" method="post">
+  {% csrf_token %}
+  <input type="hidden" id="chat_id" name="chat_id" value="-5" />
+  <button onclick="analyze();">Analyze</button>
+</form>
+
 <input type="text" id="inputbox">
 <div id="message_list"></div>
 {% endblock body %}

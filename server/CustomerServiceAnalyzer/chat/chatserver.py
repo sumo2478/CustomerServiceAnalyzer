@@ -112,6 +112,14 @@ class ChatHandler(basic.LineReceiver):
                 # Generate response message
                 response['type'] = constants.SUCCESS
                 response['message'] = "Connected with representative " + self.associated_client.name
+
+                # Send connected message to representative
+                representative_response = {}
+                representative_response['type'] = constants.SUCCESS
+                representative_response['name'] = self.name
+                representative_response['chat_id'] = self.chat_id
+                representative_response['message'] = self.chat_id
+                self.associated_client.message(json.dumps(representative_response))
             else:
                 print "No available employee"
                 response['type'] = constants.ERROR

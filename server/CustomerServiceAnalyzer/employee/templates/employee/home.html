@@ -3,8 +3,18 @@
 	<title>Employee Home Page</title>
 </head>
 <body>
-	<h1>Employee Home Page</h1>
+	<h1>Welcome {{ employee.user.get_full_name }}</h1>
 	<a href="{% url 'chat:employeechatroom' %}">Enter Chat Room</a><br>
 	<a href="{% url 'employee:logout' %}">Logout</a>
+	<br>
+	<h2>Score: {{ employee.score }}</h2>
+	<h2>Customers Helped Today</h2>
+	<h2>Graph of Scores on Recent Chat Session</h2>
+	<h2>Recent Chat Sessions</h2>
+	<ul>
+		{% for session in recent_sessions %}
+			<a href="{% url 'analyzer:analysis' chat_id=session.chat_id %}"><li>Time: {{ session.timestamp | date:" M d, Y" }} Customer Name: {{ session.customer_name }}  Score: {{ session.score }}</li></a>
+		{% endfor %}
+	</ul>
 </body>
 </html>

@@ -1,0 +1,19 @@
+<h1>Analysis Page</h1>
+<h3>Score: {{ score }}</h3>
+<h3>Histogram</h3>
+<ul>
+{% for data_point in histogram %}
+	<li>{{ data_point }}</li>
+{% endfor %}
+</ul>
+
+<h3>Messages</h3>
+<ul>
+{% for message in messages %}
+	{% if message.is_employee %}
+		<li>{{ employee.name }}: {{ message.message }}</li>
+	{% else %}
+		<li>Customer: {{ message.message }}		Score: {{ message.score }}</li>
+	{% endif %}
+{% endfor %}
+</ul>

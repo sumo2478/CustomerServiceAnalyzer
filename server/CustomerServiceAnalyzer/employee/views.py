@@ -68,7 +68,18 @@ def info(request):
 	"""Index Page"""
 	return render(request, 'employee/info.html')
 
+# Get employee helper function
+def get_employee(user_id):
+	return get_object_or_404(Employee, user__id=user_id)
+
 @user_passes_test(authenticate_employee, login_url='employee:info')
 def home(request):
 	"""Home Page"""
-	return render(request, 'employee/home.html')
+	# Retrieve the correct employee
+	employee = get_employee(request.user.id)
+	recent_sessions = employee.retrieve_recent_sessions()
+
+	params = {}
+	params['employee'] = employee
+	params['recent_sessions'] = recent_sessions
+	return render(request, 'employee/home.html', params)

@@ -3,6 +3,7 @@ from urllib import urlencode
 from urllib2 import urlopen
 
 from chat.models import Chat
+from employee.models import EmployeeChatList
 
 class Analyzer(object):
 	"""Chat Sentiment Analyzer Class"""
@@ -31,27 +32,28 @@ class Analyzer(object):
 		else: 
 			return 0
 
-
-
 	def analyze_chat_log(self, chat_id):
 		"""
 		analyze_chat_log - analyzes an entire chat log given a chat_id
 		@chat_id - int, the chat identifier number
 		@return  - int, returns 0 on success
 		"""
-		messages = Chat.objects.get(chat_id=chat_id)
+		messages = Chat.objects.filter(chat_id=chat_id)
 		total_score = 0
 
 		for message in messages:
 			score = self.get_score(message.message)
 			message.score = score
-			score.save()
+			message.save()
+
+			if message.is_employee:
+				total_score = total_score + score
 
 		employee_chat = EmployeeChatList.objects.get(chat_id=chat_id)
 		employee_chat.score = total_score
 		employee_chat.save()
 
-		return 0
+		return messages
 
 	def analyze_and_store_message(self, chat_id, entry):
 		"""
@@ -65,6 +67,20 @@ class Analyzer(object):
 		message.save()
 		return score
 
+	def create_histogram(self, messages):
+		"""
+		Create Histogram
 
+		Function that takes a list of messages and converts the scores 
+		into a histogram formatted list 
+		"""
+		running_total = 0
+		scores = []
+		for message in messages:
+			if not message.is_employee:
+				running_total += message.score
+				scores.append(running_total)
 
+		return scores
 
+				

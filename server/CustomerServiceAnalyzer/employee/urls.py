@@ -26,5 +26,4 @@ urlpatterns = patterns('',
 	# Register Employee Function
 	url(r'^create_employee/$', views.create_employee, name='create_employee')
 
-	
 	)
