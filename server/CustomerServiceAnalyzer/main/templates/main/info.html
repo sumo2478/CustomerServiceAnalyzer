@@ -45,9 +45,9 @@
         </div>
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-color navbar-custom-color">
-            <li> <a href="#home">Home</a></li>
+            <li> <a href="{% url 'main:info' %}">Home</a></li>
 			<li> <a href="#services"> Customer</a></li>
-			<li> <a href="#services"> Employee</a></li>
+			<li> <a href="{% url 'employee:home' %}"> Employee</a></li>
 			<li> <a href="#services"> Manager</a></li>
 			<li> <a> Contact</a></li>
         </div><!--/.nav-collapse -->
