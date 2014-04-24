@@ -1,10 +1,141 @@
+<!-- <!DOCTYPE html>
+{% load staticfiles %}
 <html>
 <head>
-	<title>Landing Page</title>
+	<title>Employee Login</title>
 </head>
 <body>
 	<h1>Welcome to the index page</h1>
 	<a href="{% url 'employee:login' %}">Login</a><br>
 	<a href="{% url 'employee:register' %}">Register</a>
 </body>
+</html> -->
+
+
+<!DOCTYPE html>
+{% load staticfiles %}
+<html lang="en">
+<head>
+	<link rel="shortcut icon" href="{% static 'Shield/assets/ico/favicon.png' %">
+
+	<link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+
+	<link href="{% static 'AdminLTE-master/css/iCheck/flat/blue.css' %}" rel="stylesheet">
+
+	<title>Employee Login</title>	
+
+	 <!-- Bootstrap core CSS -->
+    <link href="{% static 'Shield/assets/css/bootstrap.css' %}" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="{% static 'Shield/assets/css/main.css' %}" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'Shield/assets/css/icomoon.css' %}">
+    <link href="{% static 'Shield/assets/css/animate-custom.css" rel="stylesheet' %}">
+
+    <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Raleway:400,300,700' rel='stylesheet' type='text/css'>
+
+    <script src="{% static 'Shield/assets/js/jquery.min.js' %}"></script>
+	<script type="text/javascript" src="{% static 'Shield/assets/js/modernizr.custom.js' %}"></script>
+
+	<!--linkedin icon -->
+	<link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+
+	<!-- AdminLTE-master -->
+	   <meta charset="UTF-8">
+        <title>AdminLTE | Log in</title>
+        <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
+        <!-- bootstrap 3.0.2 -->
+       <!--  <link href="{../../css/bootstrap.min.css}" rel="stylesheet" type="text/css" /> -->
+        <link href="{% static 'AdminLTE-master/css/bootstrap.min.css' %}" rel="stylesheet" type="text/css">
+
+        <!-- font Awesome -->
+        <!-- <link href="../../css/font-awesome.min.css" rel="stylesheet" type="text/css" /> -->
+        <link href="{% static 'AdminLTE-master/css/font-awesome.min.css' %}" rel="stylesheet">
+        <!-- Theme style -->
+       <!--  <link href="../../css/AdminLTE.css" rel="stylesheet" type="text/css" /> -->
+        <link href="{% static 'AdminLTE-master/css/AdminLTE.css' %}" rel="stylesheet">
+    
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="assets/js/html5shiv.js"></script>
+      <script src="assets/js/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body class="bodyimage" data-spy="scroll" data-offset="0" data-target="#navbar-main">
+  <div id="home" name="home">
+  	<div id="navbar-main">
+      <!-- Fixed navbar -->
+    <div class="navbar navbar-inverse navbar-fixed-top navbar-wrapper">
+      <div class="container">
+
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="icon icon-shield" style="font-size:30px; color:#3498db;"></span>
+          </button>
+          <a class="navbar-brand hidden-xs hidden-sm" href="#home"><span class="icon icon-shield" style="font-size:18px; color:#3498db;"></span></a>
+        </div>
+        <div class="navbar-collapse collapse">
+          <ul class="nav navbar-nav navbar-color navbar-custom-color">
+            <li> <a href="{% url 'main:info' %}">Home</a></li>
+            <li> <a href="#services"> Customer</a></li>
+			<li> <a href="{% url 'employee:home' %}"> Employee</a></li>
+			<li> <a href="#services"> Manager</a></li>
+            <li> <a> Contact</a></li>
+            <!-- input username and ps -->
+            <form action="../../index.html" method="post">
+            <li class="form-group col-lg-4"><input type="text" name="userid" class="form-control" placeholder="User ID"/></li>
+            <li class="form-group col-lg-4"><input type="password" name="password" class="form-control" placeholder="Password"/></li>
+            <li class="footer col-lg-2"><button type="submit" class="btn bg-olive btn-block">Sign me in</button> </li>
+        </div><!--/.nav-collapse -->
+
+    </div>
+    </div>
+
+  <div><h1>Welcome to the employee page</h1></div>
+
+  <div class="form-box bg-black form-center" id="login-box">
+            <div class="header">Register New Membership</div>
+            <form action="../../index.html" method="post">
+                <div class="body bg-gray">
+                    <div class="form-group">
+                        <input type="text" name="name" class="form-control" placeholder="Full name"/>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" name="userid" class="form-control" placeholder="User ID"/>
+                    </div>
+                    <div class="form-group">
+                        <input type="password" name="password" class="form-control" placeholder="Password"/>
+                    </div>
+                    <div class="form-group">
+                        <input type="password" name="password2" class="form-control" placeholder="Retype password"/>
+                    </div>
+                </div>
+                <div class="footer">                    
+
+                    <button type="submit" class="btn bg-blue btn-block">Sign me up</button>
+
+         
+                </div>
+            </form>
+
+           
+        </div>
+</body>
 </html>
+
+        <!-- jQuery 2.0.2 -->
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
+       
+
+
+
+
+	<script type="text/javascript" src="{% static 'Shield/assets/js/bootstrap.min.js' %}"></script>
+
+
+	<!--<script type="text/javascript" src="{% static 'Shield/assets/js/retina.js' %}"></script>
+	<script type="text/javascript" src="{% static 'Shield/assets/js/jquery.easing.1.3.js' %}"></script>
+    <script type="text/javascript" src="{% static 'Shield/assets/js/smoothscroll.js' %}"></script>
+	<script type="text/javascript" src="{% static 'Shield/assets/js/jquery-func.js' %}"></script>-->
