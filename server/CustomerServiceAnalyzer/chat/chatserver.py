@@ -33,11 +33,21 @@ class ChatHandler(basic.LineReceiver):
     def connectionLost(self, reason):
         if self.client_type == constants.ENTITY_TYPE_EMPLOYEE:
             self.factory.employees.remove(self)
+
+            if self.associated_client:
+                employee_leave = {}
+                employee_leave['message'] = "Your customer representative has disconnected"
+                self.associated_client.message(json.dumps(employee_leave))
             print "Employee " + str(self.name) + " disconnected"
         elif self.client_type == constants.ENTITY_TYPE_CUSTOMER:
             if (self.associated_client):
                 self.associated_client.available = True    
                 self.associated_client.chat_id   = -1
+
+                customer_leave = {}
+                customer_leave['message'] = "Customer has disconnected from the session"
+                customer_leave['leave'] = 1
+                self.associated_client.message(json.dumps(customer_leave))
             print "Customer " + str(self.name) + " disconnected"
 
     def dataReceived(self, data):

@@ -7,77 +7,94 @@
 
 <script>
     $(document).ready( function() {
-    window.chat = {};
-    //Instantiate a websocket client connected to our server
-    chat.ws = $.gracefulWebSocket("ws://127.0.0.1:23316/ws");
-    var chat_id = -99; // Chat Id of the session
+        window.chat = {};
 
-    establish_connection();
- 
-    //Basic message send
-    chat.send = function (message) {
-      chat.ws.send("{\"action\": 1, \"message\":\"" + message + "\"}");
-    }
- 
-    //Basic message receive
-    chat.ws.onmessage = function (event) {
-      var messageFromServer = event.data;
-      var message = JSON.parse(messageFromServer);
-      var list_element = document.createElement('li');
-      if (message.chat_id) {
-        list_element.innerHTML = "Customer " + message.name + " has connected with chat id: " + message.chat_id;
-        chat_id = message.chat_id;
-      }
-      else if (message.name) {
-        list_element.innerHTML = message.name + ": " + message.message;
-      }else {
-        list_element.innerHTML = message.message;
-      }
-      $("#message_list").append(list_element);
-    };
+        //Instantiate a websocket client connected to our server
+        chat.ws = $.gracefulWebSocket("ws://127.0.0.1:23316/ws");
+        var chat_id = -99; // Chat Id of the session
 
-    var inputBox = document.getElementById("inputbox");
- 
-    inputbox.addEventListener("keydown", function(e) {
-      if (!e) { var e = window.event; }
- 
-      //keyCode 13 is the enter/return button keyCode
-      if (e.keyCode == 13) {
-        // enter/return probably starts a new line by default
-        e.preventDefault();
-        chat.send(inputbox.value);
-        inputbox.value="";
-      }
-    }, false); 
+        establish_connection();
+     
+        // Message Send Function
+        chat.send = function (message) {
+            chat.ws.send("{\"action\": 1, \"message\":\"" + message + "\"}");
+        }
+     
+        // Message Receive Function
+        chat.ws.onmessage = function (event) {
+            var messageFromServer = event.data;
+            var message = JSON.parse(messageFromServer);
+            var list_element = document.createElement('li');
 
-    function establish_connection() {
-      // Wait until state of socket is ready
-      waitForSocketConnection(chat.ws, function() {
-        chat.ws.send("{\"entity_type\":{{ info.entity_type }}, \"action\": 0, \"id\": {{ info.id }}, \"name\": \"{{ info.name }}\"}");
-      });
-    }
-
-    function waitForSocketConnection(socket, callback) {
-      setTimeout(
-        function () {
-          // If connection has been made
-          if (socket.readyState === 1) {
-            if (callback != null) {
-              callback();
+            // If the message has a chat id then a customer has joined the chat session
+            if (message.chat_id) {
+              list_element.innerHTML = "Customer " + message.name + " has joined the chat session";
+              chat_id = message.chat_id;
             }
-            return;
-          } else {
-            // Wait for connection
-            waitForSocketConnection(socket, callback);
-          }
-        }, 5
-      );
-    }
+            // If the message has a name then place it in front of the message
+            else if (message.name) {
+              list_element.innerHTML = message.name + ": " + message.message;
+            }
+            // Otherwise just print out the message that was received
+            else {
+              list_element.innerHTML = message.message;
+            }
 
-    analyze = function() {
-      document.getElementById('chat_id').value = chat_id;
-      document.getElementById('analyze_form').submit();
-    }
+            // Append the message to the chat view
+            $("#message_list").append(list_element);
+
+            // If the customer has left the chat room then analyze the chat
+            if (message.leave)
+            {
+              analyze();
+            }
+        };
+
+        // Set the chat input box to handle events
+        var inputBox = document.getElementById("inputbox");
+        inputbox.addEventListener("keydown", function(e) {
+            if (!e) { var e = window.event; }
+       
+            // If the enter key is pressed then submit the message
+            if (e.keyCode == 13) {
+              // enter/return probably starts a new line by default
+              e.preventDefault();
+              chat.send(inputbox.value);
+              inputbox.value="";
+            }
+        }, false); 
+
+        // Establish connection with the chat server
+        function establish_connection() {
+            // Wait until state of socket is ready
+            waitForSocketConnection(chat.ws, function() {
+              chat.ws.send("{\"entity_type\":{{ info.entity_type }}, \"action\": 0, \"id\": {{ info.id }}, \"name\": \"{{ info.name }}\"}");
+            });
+        }
+
+        // Timer function needed because browser isn't immediately connected with the chat server
+        function waitForSocketConnection(socket, callback) {
+            setTimeout(
+                function () {
+                  // If connection has been made
+                  if (socket.readyState === 1) {
+                      if (callback != null) {
+                        callback();
+                      }
+                      return;
+                  } else {
+                      // Wait for connection
+                      waitForSocketConnection(socket, callback);
+                  }
+                }, 5
+            );
+        }
+
+        // Analyze function redirect
+        analyze = function() {
+            document.getElementById('chat_id').value = chat_id;
+            document.getElementById('analyze_form').submit();
+        }
 
   });
 </script>
@@ -86,11 +103,12 @@
 {% block body %}
 
 <h1>Chat Room</h1>
-<form role="form" action="{% url 'analyzer:analyze' %}" method="post">
-  {% csrf_token %}
-  <input type="hidden" id="chat_id" name="chat_id" value="-5" />
-  <button onclick="analyze();">Analyze</button>
+<form role="form" action="{% url 'analyzer:analyze' %}" method="post" id="analyze_form">
+    {% csrf_token %}
+    <input type="hidden" id="chat_id" name="chat_id" value="-5" />
+    <button onclick="analyze();">Analyze</button>
 </form>
+
 
 <input type="text" id="inputbox">
 <div id="message_list"></div>
