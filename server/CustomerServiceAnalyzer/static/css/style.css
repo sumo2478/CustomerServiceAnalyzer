@@ -1,24 +1,23 @@
 .backgroundImageEmployee {
-	background-image: url('../Shield/assets/img/CityBridge.jpg') !important;
+	background-image: url('../Shield/assets/img/CityBridge.jpg');
 }
 
-.nav-container{
+/*.nav-container{
 overflow:hidden;
-white-space: nowrap;/*prevents wrapping*/
-}
+white-space: nowrap;
+}*/
 
 /* top bar texts changes color when you hover over it*/
-.navbar-color > li > a:hover {
-    color:#3498db !important;
+/*.navbar-color > li > a:hover {
+    color:#3498db;
 }
-
+*/
 /*top bar text colors*/
-.navbar-custom-color > li > a {
-    color:white !important;
-    font-style: bold !important;
-    font-weight: 400 !important;
-    /*font-size: 8px;*/
-}    
+/*.navbar-custom-color > li > a {
+    color:white;
+    font-style: bold;
+    font-weight: 400;
+} */   
 
 .navbar-form-right {
   float: right;
@@ -28,12 +27,12 @@ white-space: nowrap;/*prevents wrapping*/
 }
 
 .form-size {
-  padding: 5px 10px !important;
-  font-size: 12px !important;
-  line-height: 1.5 !important;
-  border-radius: 3px !important;
-  margin-right: 10px !important;
+  padding: 5px 10px;
+  font-size: 12px;
+  line-height: 1.5;
+  border-radius: 3px;
+  margin-right: 10px;
   margin-top: 2px;
   margin-bottom: 2px;
-  height: 30px !important;
+  height: 30px;
 }
