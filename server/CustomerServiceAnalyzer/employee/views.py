@@ -82,4 +82,5 @@ def home(request):
 	params = {}
 	params['employee'] = employee
 	params['recent_sessions'] = recent_sessions
+	params['customers_helped'] = employee.num_recent_customers()
 	return render(request, 'employee/home.html', params)

@@ -46,6 +46,9 @@ def handle_uploaded_log(f, employee_id):
 	employee_entry.score = total_score
 	employee_entry.save()
 
+	# Update the employees score
+	employee.update_score(total_score)
+
 	return chat_id
 	
 def upload_file(request):
@@ -67,8 +70,11 @@ def upload(request):
 def analyze(request):
 	params = request.POST
 
+	# Retrieve employee 
+	employee = get_employee(request.user.id)
+
 	analyzer = Analyzer()
-	messages = analyzer.analyze_chat_log(params['chat_id'])
+	messages = analyzer.analyze_chat_log(params['chat_id'], employee)
 
 	url = reverse('analyzer:analysis', kwargs={'chat_id':params['chat_id']})
 	return HttpResponseRedirect(url)
