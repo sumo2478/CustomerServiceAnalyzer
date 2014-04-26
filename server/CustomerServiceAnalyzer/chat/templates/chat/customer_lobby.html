@@ -1,0 +1,14 @@
+<html>
+<head>
+	<title>Customer Lobby</title>
+</head>
+<body>
+	<h1>Customer Lobby</h1>
+	<form role="form" action="{% url 'chat:customerchatroom' %}" method="post">
+		{% csrf_token %}
+		<input type="text" name="first_name" placeholder="First Name"/>
+		<input type="text" name="last_name" placeholder="Last Name"/>
+		<button type="submit">Enter</button>
+	</form>
+</body>
+</html>
