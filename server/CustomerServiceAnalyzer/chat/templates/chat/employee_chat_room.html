@@ -33,6 +33,7 @@
 {% endblock extra_script %}
 
 {% block extra_body %}
+    <button onclick="analyze();">Disconnect</button>
     <form role="form" action="{% url 'analyzer:analyze' %}" method="post" id="analyze_form">
         {% csrf_token %}
         <input type="hidden" id="chat_id" name="chat_id" value="-5" />

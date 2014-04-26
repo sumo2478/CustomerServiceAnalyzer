@@ -17,11 +17,14 @@ def employee_chat_room(request):
 	info['entity_type'] = constants.ENTITY_TYPE_EMPLOYEE
 
 	return render(request, 'chat/employee_chat_room.html', {'info': info})
-    
+
+def customer_lobby(request):
+	return render(request, 'chat/customer_lobby.html')
+
 def customer_chat_room(request):
 	info = {}
-	info['id'] = 2
-	info['name'] = "Customer"
+	info['id'] = -1
+	info['name'] = request.POST['first_name'] + " " + request.POST['last_name']
 	info['entity_type'] = constants.ENTITY_TYPE_CUSTOMER
 
 	return render(request, 'chat/customer_chat_room.html', {'info':info})

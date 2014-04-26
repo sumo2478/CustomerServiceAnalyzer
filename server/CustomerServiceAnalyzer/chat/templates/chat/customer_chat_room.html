@@ -11,3 +11,7 @@
 		list_element.innerHTML = message.message;
 	}
 {% endblock chat_logic %}
+
+{% block extra_body %}
+	<a href="{% url 'chat:customerlobby' %}"><button>Disconnect</button></a>
+{% endblock extra_body %}
