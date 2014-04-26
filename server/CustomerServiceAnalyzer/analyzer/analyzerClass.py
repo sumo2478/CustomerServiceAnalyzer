@@ -32,7 +32,7 @@ class Analyzer(object):
 		else: 
 			return 0
 
-	def analyze_chat_log(self, chat_id):
+	def analyze_chat_log(self, chat_id, employee):
 		"""
 		analyze_chat_log - analyzes an entire chat log given a chat_id
 		@chat_id - int, the chat identifier number
@@ -46,12 +46,16 @@ class Analyzer(object):
 			message.score = score
 			message.save()
 
-			if message.is_employee:
+			if not message.is_employee:
 				total_score = total_score + score
 
 		employee_chat = EmployeeChatList.objects.get(chat_id=chat_id)
 		employee_chat.score = total_score
 		employee_chat.save()
+
+		# Update the employees total score
+		employee.update_score(total_score)
+		employee.save()
 
 		return messages
 
