@@ -31,8 +31,7 @@
 
 	{% block class %}<body data-spy="scroll" data-offset="0" data-target="#navbar-main">{% endblock class %}
   
-  	<div id={% block headerwrap %}"headerwrap"{% endblock headerwrap %}  name="home">
-		<div id="navbar-main">
+    <div id="navbar-main">
 			<div class="navbar navbar-inverse navbar-fixed-top navbar-wrapper">
       			<div class="container">
         			<div class="navbar-header">
@@ -43,14 +42,13 @@
         			</div>
         			<div class="navbar-collapse collapse">
           				<ul class="nav navbar-nav navbar-color navbar-custom-color">
-            				<li> <a href="{% url 'main:info' %}">Home</a></li>
-							<li> <a href="#services"> Customer</a></li>
-							<li> <a href="{% url 'employee:home' %}"> Employee</a></li>
-							<li> <a href="#services"> Manager</a></li>
-							<li> <a> Contact</a></li>
-							{% block extra_list %}{% endblock extra_list %}
-
-						</ul>
+            			   <li> <a href="{% url 'main:info' %}">Home</a></li>
+							       <li> <a href="#services"> Customer</a></li>
+							       <li> <a href="{% url 'employee:home' %}"> Employee</a></li>
+							       <li> <a href="#services"> Manager</a></li>
+							       <li> <a> Contact</a></li>
+							       {% block extra_list %}{% endblock extra_list %}
+                  </ul>
         			</div><!--/.nav-collapse -->
       			</div>
     		</div>
