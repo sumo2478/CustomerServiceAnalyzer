@@ -1,0 +1,41 @@
+{% extends "chat/base_chat_room.html" %}
+{% load staticfiles %}
+
+{% block chat_logic %}
+  // If the message has a chat id then a customer has joined the chat session
+  if (message.chat_id) {
+    list_element.innerHTML = "Customer " + message.name + " has joined the chat session";
+    chat_id = message.chat_id;
+  }
+  // If the message has a name then place it in front of the message
+  else if (message.name) {
+    list_element.innerHTML = message.name + ": " + message.message;
+  }
+  // Otherwise just print out the message that was received
+  else {
+    list_element.innerHTML = message.message;
+  }
+
+  // If the customer has left the chat room then analyze the chat
+  if (message.leave)
+  {
+    analyze();
+  }
+
+{% endblock chat_logic %}
+
+{% block extra_script %}
+  // Analyze function redirect
+  analyze = function() {
+      document.getElementById('chat_id').value = chat_id;
+      document.getElementById('analyze_form').submit();
+  }
+{% endblock extra_script %}
+
+{% block extra_body %}
+    <button onclick="analyze();">Disconnect</button>
+    <form role="form" action="{% url 'analyzer:analyze' %}" method="post" id="analyze_form">
+        {% csrf_token %}
+        <input type="hidden" id="chat_id" name="chat_id" value="-5" />
+    </form>
+{% endblock extra_body %}

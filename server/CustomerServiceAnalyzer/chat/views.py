@@ -7,8 +7,8 @@ from django.contrib.auth.models import User
 import constants
 
 # Create your views here.
-def render_chat_room(request, info):
-	return render(request, 'chat/chat_room.html', {'info':info})
+# def render_chat_room(request, info):
+# 	return render(request, 'chat/chat_room.html', {'info':info})
 
 def employee_chat_room(request):
 	info = {}
@@ -16,12 +16,15 @@ def employee_chat_room(request):
 	info['name'] = request.user.get_full_name()
 	info['entity_type'] = constants.ENTITY_TYPE_EMPLOYEE
 
-	return render_chat_room(request, info)
-    
+	return render(request, 'chat/employee_chat_room.html', {'info': info})
+
+def customer_lobby(request):
+	return render(request, 'chat/customer_lobby.html')
+
 def customer_chat_room(request):
 	info = {}
-	info['id'] = 2
-	info['name'] = "Customer"
+	info['id'] = -1
+	info['name'] = request.POST['first_name'] + " " + request.POST['last_name']
 	info['entity_type'] = constants.ENTITY_TYPE_CUSTOMER
 
-	return render_chat_room(request, info)
+	return render(request, 'chat/customer_chat_room.html', {'info':info})

@@ -1,0 +1,90 @@
+{% extends "main/base.html" %}
+{% load staticfiles %}
+{% block head %}
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script type="text/javascript" src="{% static "jquery.gracefulWebSocket.js" %}"></script>
+
+<script>
+    $(document).ready( function() {
+        window.chat = {};
+
+        //Instantiate a websocket client connected to our server
+        chat.ws = $.gracefulWebSocket("ws://127.0.0.1:23316/ws");
+        var chat_id = -99; // Chat Id of the session
+
+        establish_connection();
+     
+        // Message Send Function
+        chat.send = function (message) {
+            chat.ws.send("{\"action\": 1, \"message\":\"" + message + "\"}");
+        }
+     
+        // Message Receive Function
+        chat.ws.onmessage = function (event) {
+            var messageFromServer = event.data;
+            var message = JSON.parse(messageFromServer);
+            var list_element = document.createElement('li');
+
+            // Section that determines what to do upon receiving a message
+            {% block chat_logic %}{% endblock chat_logic %}
+            
+            // Append the message to the chat view
+            $("#message_list").append(list_element);
+
+        }
+
+        // Set the chat input box to handle events
+        var inputBox = document.getElementById("inputbox");
+        inputbox.addEventListener("keydown", function(e) {
+            if (!e) { var e = window.event; }
+       
+            // If the enter key is pressed then submit the message
+            if (e.keyCode == 13) {
+              // enter/return probably starts a new line by default
+              e.preventDefault();
+              chat.send(inputbox.value);
+              inputbox.value="";
+            }
+        }, false); 
+
+        // Establish connection with the chat server
+        function establish_connection() {
+            // Wait until state of socket is ready
+            waitForSocketConnection(chat.ws, function() {
+              chat.ws.send("{\"entity_type\":{{ info.entity_type }}, \"action\": 0, \"id\": {{ info.id }}, \"name\": \"{{ info.name }}\"}");
+            });
+        }
+
+        // Timer function needed because browser isn't immediately connected with the chat server
+        function waitForSocketConnection(socket, callback) {
+            setTimeout(
+                function () {
+                  // If connection has been made
+                  if (socket.readyState === 1) {
+                      if (callback != null) {
+                        callback();
+                      }
+                      return;
+                  } else {
+                      // Wait for connection
+                      waitForSocketConnection(socket, callback);
+                  }
+                }, 5
+            );
+        }
+
+        {% block extra_script %}{% endblock extra_script %}
+  });
+</script>
+{% endblock head %}
+
+{% block body %}
+
+<h1>Chat Room</h1>
+
+<input type="text" id="inputbox">
+{% block extra_body %}{% endblock extra_body %}
+<div id="message_list"></div>
+{% endblock body %}
+
