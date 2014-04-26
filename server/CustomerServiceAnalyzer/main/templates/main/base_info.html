@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+
+<html lang="en">
+
+<head>
+	
+	<title>{% block title %}Title{% endblock title %}</title>
+	
+	{% block stylesheets %}
+	
+    <link href="{% static 'Shield/assets/css/bootstrap.css' %}" rel="stylesheet">
+
+    <link href="{% static 'Shield/assets/css/main.css' %}" rel="stylesheet">
+    
+    <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic' rel='stylesheet' type='text/css'>
+
+    <link href='http://fonts.googleapis.com/css?family=Raleway:400,300,700' rel='stylesheet' type='text/css'>
+
+   	{% endblock stylesheets %}
+
+	{% block extra_stylesheets %}{% endblock extra_stylesheets %}
+
+	{% block extra_headers %}{% endblock extra_headers %}
+
+</head>
+
+<body>
+
+	{% block body %} 
+
+	{% block class %}<body data-spy="scroll" data-offset="0" data-target="#navbar-main">{% endblock class %}
+  
+  	<div id={% block headerwrap %}"headerwrap"{% endblock headerwrap %}  name="home">
+		<div id="navbar-main">
+			<div class="navbar navbar-inverse navbar-fixed-top navbar-wrapper">
+      			<div class="container">
+        			<div class="navbar-header">
+          				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            			<span class="icon icon-shield" style="font-size:30px; color:#3498db;"></span>
+          				</button>
+          				<a class="navbar-brand hidden-xs hidden-sm" href="#home"><span class="icon icon-shield" style="font-size:18px; color:#3498db;"></span></a>
+        			</div>
+        			<div class="navbar-collapse collapse">
+          				<ul class="nav navbar-nav navbar-color navbar-custom-color">
+            				<li> <a href="{% url 'main:info' %}">Home</a></li>
+							<li> <a href="#services"> Customer</a></li>
+							<li> <a href="{% url 'employee:home' %}"> Employee</a></li>
+							<li> <a href="#services"> Manager</a></li>
+							<li> <a> Contact</a></li>
+							{% block extra_list %}{% endblock extra_list %}
+
+						</ul>
+        			</div><!--/.nav-collapse -->
+      			</div>
+    		</div>
+    	</div>
+    </div>
+
+	{% block extra_body %}{% endblock extra_body %}
+
+	{% endblock body %}
+
+	
+
+</body>
+
+</html>
