@@ -1,0 +1,13 @@
+{% extends 'chat/base_chat_room.html' %}
+{% load staticfiles %}
+
+{% block chat_logic %}
+	// If the message has a name then place it in front of the message
+	if (message.name) {
+		list_element.innerHTML = message.name + ": " + message.message;
+	}
+	// Otherwise just print out the message that was received
+	else {
+		list_element.innerHTML = message.message;
+	}
+{% endblock chat_logic %}

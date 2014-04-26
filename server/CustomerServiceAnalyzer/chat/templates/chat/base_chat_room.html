@@ -26,29 +26,13 @@
             var message = JSON.parse(messageFromServer);
             var list_element = document.createElement('li');
 
-            // If the message has a chat id then a customer has joined the chat session
-            if (message.chat_id) {
-              list_element.innerHTML = "Customer " + message.name + " has joined the chat session";
-              chat_id = message.chat_id;
-            }
-            // If the message has a name then place it in front of the message
-            else if (message.name) {
-              list_element.innerHTML = message.name + ": " + message.message;
-            }
-            // Otherwise just print out the message that was received
-            else {
-              list_element.innerHTML = message.message;
-            }
-
+            // Section that determines what to do upon receiving a message
+            {% block chat_logic %}{% endblock chat_logic %}
+            
             // Append the message to the chat view
             $("#message_list").append(list_element);
 
-            // If the customer has left the chat room then analyze the chat
-            if (message.leave)
-            {
-              analyze();
-            }
-        };
+        }
 
         // Set the chat input box to handle events
         var inputBox = document.getElementById("inputbox");
@@ -90,12 +74,7 @@
             );
         }
 
-        // Analyze function redirect
-        analyze = function() {
-            document.getElementById('chat_id').value = chat_id;
-            document.getElementById('analyze_form').submit();
-        }
-
+        {% block extra_script %}{% endblock extra_script %}
   });
 </script>
 {% endblock head %}
@@ -103,11 +82,8 @@
 {% block body %}
 
 <h1>Chat Room</h1>
-<form role="form" action="{% url 'analyzer:analyze' %}" method="post" id="analyze_form">
-    {% csrf_token %}
-    <input type="hidden" id="chat_id" name="chat_id" value="-5" />
-    <button onclick="analyze();">Analyze</button>
-</form>
+
+{% block extra_body %}{% endblock extra_body %}
 
 
 <input type="text" id="inputbox">
