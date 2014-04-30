@@ -272,7 +272,7 @@ a:after {
 
 
 #headerwrap {
-	background: url(../img/peopleattable_copy2.jpg) no-repeat center top;
+	background: url(../../img/main/peopleattable_copy2.jpg) no-repeat center top;
 	margin-top: -50px;
 	padding-top:120px;
 	text-align:center;
@@ -419,15 +419,15 @@ a:after {
 /* Section Dividers Backgrounds */
 
 .divider1 {
-	background-image: url('../img/cityview.jpg')
+	background-image: url('../../img/main/cityview.jpg')
 }
 
 .divider2 {
-	background-image: url('../img/Glassesandlaptop.jpg')
+	background-image: url('../../img/main/Glassesandlaptop.jpg')
 }
 
 .divider3 {
-	background-image: url('../img/sunlighttree.jpg');
+	background-image: url('../../img/main/sunlighttree.jpg');
 	margin-top: 0px;
 }
 
@@ -663,10 +663,6 @@ a:after {
 }
 .linkedicon {
     color: #3498db;
-}
-
-.bodyimage {
-    background-image: url('../img/CityBridge.jpg');
 }
 
 

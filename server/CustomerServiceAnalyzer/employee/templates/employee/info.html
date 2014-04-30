@@ -6,20 +6,13 @@
 
 {% block extra_stylesheets %}
 
-	<link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/main/style.css' %}">
 
 	<meta charset="UTF-8">        	
        
     <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
-
-    <link href="{% static 'AdminLTE-master/css/font-awesome.min.css' %}" rel="stylesheet">
-        
-    <link href="{% static 'AdminLTE-master/css/AdminLTE.css' %}" rel="stylesheet">
-
     
 {% endblock extra_stylesheets %}
-
-
 
 {% block class %}<body class="backgroundImageEmployee" data-spy="scroll" data-offset="0" data-target="#navbar-main">{% endblock class %}
 
@@ -37,29 +30,30 @@
 
 
 {% block extra_body %}
-
-	<div class="form-box bg-black form-center" id="login-box">
-	    <div class="header">Register New Membership</div>
-	        <form action="../../index.html" method="post">
-		    <div class="body bg-gray">
-		        <div class="form-group">
-		            <input type="text" name="name" class="form-control" placeholder="Full name"/>
-		        </div>
-		        <div class="form-group">
-		            <input type="text" name="userid" class="form-control" placeholder="User ID"/>
-		        </div>
-		        <div class="form-group">
-		            <input type="password" name="password" class="form-control" placeholder="Password"/>
-		        </div>
-		        <div class="form-group">
-		            <input type="password" name="password2" class="form-control" placeholder="Retype password"/>
-		        </div>
-			</div>
-			<div class="footer">                    
-				<button type="submit" class="btn bg-blue btn-block">Sign me up</button>
-			</div>
-	        </form>
-		</div>
+	<div>
+		<h2 class="pagetitle">Welcome to the Employee Page</h2>
+	</div>
+	<div class ="form-box" id="login-box">
+		<div class="header bg-black"> Register New Employee</div>
+		<form action="../../index.html" method="post">
+			<div class="body bg-gray">
+				<div class="form-group">
+					<input type="text" name="name" class="form-control" placeholder="Full name"/>
+				</div>
+				<div class="form-group">
+					<input type="text" name="userid" class="form-control" placeholder="User ID"/>
+				</div>
+				<div class="form-group">
+                    <input type="password" name="password" class="form-control" placeholder="Password"/>
+                </div>
+                <div class="form-group">
+                    <input type="password" name="password2" class="form-control" placeholder="Retype password"/>
+                </div>
+            </div>
+            <div class="footer bg-black">
+            	<button type="submit" class="btn btn-primary btn-block">Sign me up</button>
+            </div>
+           </form>
 	</div>
 
 </body>

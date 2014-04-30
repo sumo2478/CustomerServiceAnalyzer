@@ -9,15 +9,17 @@
 	
 	{% block stylesheets %}
 	
-    <link href="{% static 'Shield/assets/css/bootstrap.css' %}" rel="stylesheet">
+    <link href="{% static 'css/main/bootstrap.css' %}" rel="stylesheet">
 
-    <link href="{% static 'Shield/assets/css/main.css' %}" rel="stylesheet">
+    <link href="{% static 'css/main/main.css' %}" rel="stylesheet">
     
     <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic' rel='stylesheet' type='text/css'>
 
     <link href='http://fonts.googleapis.com/css?family=Raleway:400,300,700' rel='stylesheet' type='text/css'>
 
-   	{% endblock stylesheets %}
+    <link rel="stylesheet" href="{% static 'css/main/icomoon.css' %}">
+
+  {% endblock stylesheets %}
 
 	{% block extra_stylesheets %}{% endblock extra_stylesheets %}
 
